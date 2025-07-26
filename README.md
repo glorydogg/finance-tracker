@@ -1,4 +1,16 @@
 # Finance-Tracker
-## A finance tracker to track ones bi-weekly and monthly spending
-### Different charts to read spending
-### Data stored for every month
+
+A simple personal finance tracker built with python, SQLite, and pandas.  
+Track income, expenses, and generate summaries.
+
+## Features
+Add income and expense entries by category and date
+View monthly and category wise totals
+Store data in SQLite database
+Analyze transactions using pandas
+
+## Tech Stack
+
+-Python
+-SQLite
+-Pandas
