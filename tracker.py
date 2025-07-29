@@ -17,8 +17,8 @@ class ExpenseTracker:
             return None
 
     def add_expense(self):
-        date_str = input("Enter date (YYYY-MM-DD), or leave blank for today: ")
-        expense_date = self._get_valid_date(date_str)
+        date_str = input("Enter date (YYYY-MM-DD), or leave blank for today: ") 
+        expense_date = self._get_valid_date(date_str) #Input validation
         if expense_date is None:
             return
 
@@ -72,4 +72,26 @@ class ExpenseTracker:
             total += expense["amount"]
         print(f"Total: ${total:.2f}")
 
+    def get_expense_by_date(self, start_date, end_date):
+        filtered_expenses = []
+        for expense in self.expenses:
+            if start_date <= expense["date"] <= end_date:
+                filtered_expenses.append(expense)
+            
+            print("There are no expenses within this range")
+                
+        filtered_expenses = sorted(filtered_expenses, key=lambda e: e["date"])
+
+        for expense in filtered_expenses:
+            print(f"- {expense['date']}: ${expense['amount']:.2f}")
+            total += expense['amount']
+            print(f"Total: ${total:.2f}")
+
+
+
+
+
+
+
     
+ 
