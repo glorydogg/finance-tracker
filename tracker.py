@@ -23,7 +23,7 @@ class ExpenseTracker:
             return
 
         category = input(f"Enter category {self.categories}: ")
-        if category not in self.categories:
+        if category.lower() not in self.categories.lower():
             print("Invalid category.")
             return
 
@@ -55,7 +55,7 @@ class ExpenseTracker:
         })
         print(f"Income of ${amount:.2f} added on {income_date}")
     
-    def get_expense_by_category(category_name, self):
+    def get_expense_by_category(self, category_name):
         if category_name not in self.categories:
             print("Invalid category.")
 
@@ -86,6 +86,42 @@ class ExpenseTracker:
             print(f"- {expense['date']}: ${expense['amount']:.2f}")
             total += expense['amount']
             print(f"Total: ${total:.2f}")
+
+    def view_all_expenses(self):
+        for expense in self.expenses:
+            print(expense)
+
+if __name__ == "__main__":
+    tracker = ExpenseTracker()
+    while True:
+        print("Option: \n1 Add expense \n2 Add income \n3 View by category \n4 View by date range \n5 View all")
+        choice = input("Enter 1-6")
+        if choice == "1":
+            tracker.add_expense()
+        elif choice == "2":
+            try:
+                amt = float(input("Enter income amount: "))
+                date_str = input("Enter income date (YYYY-MM-DD), or leave blank for today: ")
+                d = tracker._get_valid_date(date_str)
+                if d: tracker.add_income(amt, d)
+            except ValueError:  
+                print("Invalid Input")
+        elif choice == "3":
+            cat = input(f"Enter category {tracker.categories}: ")
+            tracker.get_expense_by_category(cat)
+        elif choice == "4":
+            s = tracker._get_valid_date(input("Start date (YYYY-MM-DD): "))
+            e = tracker._get_valid_date(input("End date (YYYY-MM-DD): "))
+            if s and e:
+                tracker.get_expense_by_date(s, e)
+        elif choice == "5":
+            tracker.view_all_expenses()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice.")
+
+
 
 
 
